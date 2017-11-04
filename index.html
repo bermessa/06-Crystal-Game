@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Crystal Game</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="jumbotron">
+            <span class="glyphicon glyphicon-triangle-left"></span> Crystal Collector Game
+            <span class="glyphicon glyphicon-triangle-right"></span>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><b>Instructions</b></h3>
+            </div>
+            <div class="panel-body">
+                &bull; You will be given a random number at the start of a game <br> &bull; There are four crystals below, by clicking on a crystal you will add a specific amount of points to your total score <br> &bull; You win the game by matching your
+                total score to the random number, you lose the game if your total score goes above the random <br> &bull; The value of each crystal is hidden from you until you click on it <br> &bull; Each time the game starts, the value of each crystal
+                will change
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p><b>Number to match:</b> <span class="match"></span></p>
+                        <p><b>Your score:</b> <span class="score"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img class="crystal" src="images/crystal1.png" width="85px" height="85px">
+                        <img class="crystal" src="images/crystal2.jpg" width="85px" height="85px">
+                        <img class="crystal" src="images/crystal3.jpg" width="85px" height="85px">
+                        <img class="crystal" src="images/crystal4.png" width="85px" height="85px">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p>Wins: <span class="win"></span></p>
+                        <p>Losses: <span class="loss"></span></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+        var targetNumber = Math.floor(Math.random() * (120 - 19) + 19);
+        var userScore = 0;
+        var win = 0;
+        var loss = 0;
+
+        $(".match").text(targetNumber);
+
+
+        $(".crystal").on("click", function() {
+            var crystalCount = Math.floor(Math.random() * (12 - 1) + 1);
+            userScore = userScore + crystalCount;
+            $(".score").text(userScore);
+
+
+            if (userScore === targetNumber) {
+                win++;
+                $(".win").text(win);
+                userScore = 0;
+            }
+            else if (userScore > targetNumber) {
+                loss++;
+                $(".loss").text(loss);
+                userScore = 0;
+            }
+        });
+    </script>
+</body>
+
+</html>
