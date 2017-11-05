@@ -56,8 +56,8 @@
             <div class="col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <p>Wins: <span class="win"></span></p>
-                        <p>Losses: <span class="loss"></span></p>
+                        <p><b>Wins:</b><span class="win"></span></p>
+                        <p><b>Losses:</b> <span class="loss"></span></p>
                     </div>
                 </div>
             </div>
@@ -68,16 +68,15 @@
 
 
     <script type="text/javascript">
-        var targetNumber = Math.floor(Math.random() * (120 - 19) + 19);
+        var targetNumber = [Math.floor(Math.random() * (120 - 19) + 19)];
         var userScore = 0;
         var win = 0;
         var loss = 0;
 
         $(".match").text(targetNumber);
 
-
         $(".crystal").on("click", function() {
-            var crystalCount = Math.floor(Math.random() * (12 - 1) + 1);
+            var crystalCount = Math.floor(Math.random() * 12) + 1;
             userScore = userScore + crystalCount;
             $(".score").text(userScore);
 
@@ -86,12 +85,16 @@
                 win++;
                 $(".win").text(win);
                 userScore = 0;
+                return targetNumber;
+
             }
             else if (userScore > targetNumber) {
                 loss++;
                 $(".loss").text(loss);
                 userScore = 0;
+                return targetNumber;
             }
+
         });
     </script>
 </body>
