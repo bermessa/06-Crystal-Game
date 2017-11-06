@@ -68,33 +68,42 @@
 
 
     <script type="text/javascript">
-        var targetNumber = [Math.floor(Math.random() * (120 - 19) + 19)];
-        var userScore = 0;
-        var win = 0;
-        var loss = 0;
+        $(document).ready(function() {
 
-        $(".match").text(targetNumber);
+            var targetNumber;
+            var userScore = 0;
+            var win = 0;
+            var loss = 0;
 
-        $(".crystal").on("click", function() {
-            var crystalCount = Math.floor(Math.random() * 12) + 1;
-            userScore = userScore + crystalCount;
-            $(".score").text(userScore);
-
-
-            if (userScore === targetNumber) {
-                win++;
-                $(".win").text(win);
-                userScore = 0;
-                return targetNumber;
-
-            }
-            else if (userScore > targetNumber) {
-                loss++;
-                $(".loss").text(loss);
-                userScore = 0;
-                return targetNumber;
+            function resetGame() {
+                targetNumber = Math.floor(Math.random() * (120 - 19) + 19);
+                $(".match").text(targetNumber);
+                $(".score").text(userScore = 0);
             }
 
+            resetGame();
+
+            $(".crystal").on("click", function() {
+                var crystalCount = Math.floor(Math.random() * 12) + 1;
+                userScore = userScore + crystalCount;
+                $(".score").text(userScore);
+
+
+                if (userScore === targetNumber) {
+                    win++;
+                    $(".win").text(win);
+                    resetGame();
+                    alert("You won!");
+                }
+
+                else if (userScore > targetNumber) {
+                    loss++;
+                    $(".loss").text(loss);
+                    resetGame();
+                    alert("Bummer... try again");
+                }
+
+            });
         });
     </script>
 </body>
